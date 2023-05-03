@@ -181,6 +181,9 @@ Contributors
 * Letizia Freda <letizia.freda@netfarm.it>
 * Andrea Piovesana <andrea.m.piovesana@gmail.com>
 * Alex Comba <alex.comba@agilebg.com>
+* `Ooops <https://www.ooops404.com>`_:
+
+   * Giovanni Serra <giovanni@gslab.it>
 
 Maintainers
 ~~~~~~~~~~~
@@ -198,13 +201,10 @@ promote its widespread use.
 .. |maintainer-As400it| image:: https://github.com/As400it.png?size=40px
     :target: https://github.com/As400it
     :alt: As400it
-.. |maintainer-Byloth| image:: https://github.com/Byloth.png?size=40px
-    :target: https://github.com/Byloth
-    :alt: Byloth
 
-Current `maintainers <https://odoo-community.org/page/maintainer-role>`__:
+Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-As400it| |maintainer-Byloth| 
+|maintainer-As400it| 
 
 This module is part of the `OCA/l10n-italy <https://github.com/OCA/l10n-italy/tree/14.0/l10n_it_delivery_note>`_ project on GitHub.
 

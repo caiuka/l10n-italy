@@ -15,10 +15,10 @@ exclude: |
   # You don't usually want a bot to modify your legal texts
   (LICENSE.*|COPYING.*)|
   # official goverment specs
-  (l10n_it_fatturapa/data/xsd)|
+  (l10n_it_account/tools/xsd)|
   # external stylesheets
-  (l10n_it_fatturapa/data/fatturaordinaria_v1.2.1.xsl)|
-  (l10n_it_fatturapa/data/FoglioStileAssoSoftware_v1.1.xsl)|
+  (l10n_it_fatturapa/data/Foglio_di_stile_fatturaordinaria_v1.2.2.xsl)|
+  (l10n_it_fatturapa/data/FoglioStileAssoSoftware.xsl)|
   # XML tests should not be reformatted
   ^l10n_it_fatturapa_out/tests/data|
   ^l10n_it_fatturapa_in/tests/data|
@@ -37,6 +37,11 @@ repos:
         entry: found forbidden files; remove them
         language: fail
         files: "\\.rej$"
+      - id: en-po-files
+        name: en.po files cannot exist
+        entry: found a en.po file
+        language: fail
+        files: '[a-zA-Z0-9_]*/i18n/en\.po$'
   - repo: https://github.com/oca/maintainer-tools
     rev: ab1d7f6
     hooks:
@@ -56,7 +61,7 @@ repos:
           - --remove-duplicate-keys
           - --remove-unused-variables
   - repo: https://github.com/psf/black
-    rev: 20.8b1
+    rev: 22.3.0
     hooks:
       - id: black
   - repo: https://github.com/pre-commit/mirrors-prettier
@@ -106,7 +111,7 @@ repos:
       - id: pyupgrade
         args: ["--keep-percent-format"]
   - repo: https://github.com/PyCQA/isort
-    rev: 5.5.1
+    rev: 5.12.0
     hooks:
       - id: isort
         name: isort except __init__.py
@@ -114,7 +119,7 @@ repos:
           - --settings=.
         exclude: /__init__\.py$
   - repo: https://github.com/acsone/setuptools-odoo
-    rev: 2.6.0
+    rev: 3.1.8
     hooks:
       - id: setuptools-odoo-make-default
       - id: setuptools-odoo-get-requirements
@@ -123,27 +128,22 @@ repos:
           - requirements.txt
           - --header
           - "# generated from manifests external_dependencies"
-  - repo: https://gitlab.com/PyCQA/flake8
+  - repo: https://github.com/PyCQA/flake8
     rev: 3.8.3
     hooks:
       - id: flake8
         name: flake8
         additional_dependencies: ["flake8-bugbear==20.1.4"]
-  - repo: https://github.com/PyCQA/pylint
-    rev: pylint-2.5.3
+  - repo: https://github.com/OCA/pylint-odoo
+    rev: 7.0.2
     hooks:
-      - id: pylint
+      - id: pylint_odoo
         name: pylint with optional checks
         args:
           - --rcfile=.pylintrc
           - --exit-zero
           - --ignore=l10n_it_fatturapa_in/tests/data/
         verbose: true
-        additional_dependencies: &pylint_deps
-          - pylint-odoo==3.5.0
-      - id: pylint
-        name: pylint with mandatory checks
+      - id: pylint_odoo
         args:
           - --rcfile=.pylintrc-mandatory
-          - --ignore=l10n_it_fatturapa_in/tests/data/
-        additional_dependencies: *pylint_deps

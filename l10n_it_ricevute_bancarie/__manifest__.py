@@ -9,8 +9,8 @@
 
 {
     "name": "ITA - Ricevute bancarie",
-    "version": "14.0.1.0.0",
-    "development_status": "Alpha",
+    "version": "14.0.1.2.3",
+    "development_status": "Beta",
     "author": "Odoo Community Association (OCA)",
     "category": "Localization/Italy",
     "summary": "Ricevute bancarie",
@@ -27,6 +27,7 @@
         "data/riba_sequence.xml",
         "report/report.xml",
         "security/ir.model.access.csv",
+        "security/riba_security.xml",
         "views/wizard_accreditation.xml",
         "views/wizard_unsolved.xml",
         "views/riba_view.xml",

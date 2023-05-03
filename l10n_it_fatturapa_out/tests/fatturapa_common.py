@@ -27,6 +27,7 @@ class FatturaPACommon(AccountTestInvoicingCommon):
         )
         self.env.user = self.account_manager
         self.company = self.env.company
+        self.company.e_invoice_transmitter_id = self.company.partner_id.id
 
         self.wizard_model = self.env["wizard.export.fatturapa"]
         self.data_model = self.env["ir.model.data"]
@@ -143,6 +144,10 @@ class FatturaPACommon(AccountTestInvoicingCommon):
         self.res_partner_fatturapa_4 = self.env.ref(
             "l10n_it_fatturapa.res_partner_fatturapa_4"
         )
+        # B2C Customer IT
+        self.res_partner_fatturapa_6 = self.env.ref(
+            "l10n_it_fatturapa.res_partner_fatturapa_6"
+        )
         self.EUR = self.env.ref("base.EUR")
         # United Arab Emirates currency
         self.AED = self.env.ref("base.AED")
@@ -150,6 +155,7 @@ class FatturaPACommon(AccountTestInvoicingCommon):
             "UPDATE res_company SET currency_id = %s WHERE id = %s",
             [self.EUR.id, self.company.id],
         )
+        self.trasmittente = self.env.ref("l10n_it_fatturapa.res_partner_fatturapa_1")
         # Otherwise self.company in cache could keep the old wrong value USD
         self.company.refresh()
 
@@ -227,28 +233,12 @@ class FatturaPACommon(AccountTestInvoicingCommon):
         return self.getFilePath(path)
 
     def _create_invoice(self):
-        return self.invoice_model.create(
-            {
-                "name": "Test Invoice",
-                "journal_id": self.sales_journal.id,
-                "partner_id": self.res_partner_fatturapa_0.id,
-                "move_type": "out_invoice",
-                "invoice_line_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "account_id": self.a_sale.id,
-                            "product_id": self.product_product_10.id,
-                            "name": self.product_product_10.name,
-                            "quantity": 1,
-                            "price_unit": 1,
-                            "tax_ids": [(6, 0, {self.tax_22.id})],
-                        },
-                    ),
-                ],
-            }
+        invoice = self.init_invoice(
+            "out_invoice",
+            partner=self.res_partner_fatturapa_0,
+            products=self.product_product_10,
         )
+        return invoice
 
     def _create_e_invoice(self):
         invoice = self._create_invoice()

@@ -4,15 +4,15 @@
 
 {
     "name": "ITA - Intrastat",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.3.0",
     "category": "Account",
     "summary": "Riclassificazione merci e servizi per dichiarazioni Intrastat",
     "author": "Openforce, Link IT srl, Agile Business Group, "
+    "Powerp network, "
     "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/l10n-italy",
     "license": "AGPL-3",
     "depends": [
-        "sale_management",
         "product",
         "stock",
         "stock_account",
@@ -22,6 +22,7 @@
     "data": [
         "security/ir.model.access.csv",
         "data/account.intrastat.transaction.nature.csv",
+        "data/account.intrastat.transaction.nature.b.csv",
         "data/account.intrastat.transport.csv",
         "data/account.intrastat.custom.csv",
         "data/report.intrastat.code.csv",

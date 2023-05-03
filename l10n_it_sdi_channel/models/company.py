@@ -11,15 +11,11 @@ class ResCompany(models.Model):
     sdi_channel_type = fields.Selection(
         related="sdi_channel_id.channel_type", readonly=True
     )
-    email_from_for_fatturaPA = fields.Char(
-        string="Sender Email Address",
-        related="sdi_channel_id.pec_server_id.email_from_for_fatturaPA",
-        readonly=True,
-    )
-    email_exchange_system = fields.Char(
-        string="Exchange System Email Address",
-        related="sdi_channel_id.email_exchange_system",
-        readonly=True,
+    e_invoice_user_id = fields.Many2one(
+        comodel_name="res.users",
+        string="E-bill creator",
+        help="This user will be used at supplier e-bill creation.",
+        default=lambda self: self.env.user.id,
     )
 
 
@@ -32,13 +28,13 @@ class AccountConfigSettings(models.TransientModel):
     sdi_channel_type = fields.Selection(
         related="sdi_channel_id.channel_type", readonly=True
     )
-    email_from_for_fatturaPA = fields.Char(
-        string="Sender Email Address",
-        related="sdi_channel_id.pec_server_id.email_from_for_fatturaPA",
-        readonly=True,
+    e_invoice_user_id = fields.Many2one(
+        related="company_id.e_invoice_user_id",
+        readonly=False,
     )
-    email_exchange_system = fields.Char(
-        string="Exchange System Email Address",
-        related="sdi_channel_id.email_exchange_system",
-        readonly=True,
+    group_sdi_channel_validate_send = fields.Boolean(
+        string="Validate, export and send invoices",
+        help="Allow users to validate, export and send invoices to SdI "
+        "in one click.",
+        implied_group="l10n_it_sdi_channel.res_groups_validate_send",
     )

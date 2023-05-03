@@ -8,7 +8,7 @@
 
 {
     "name": "ITA - Fattura elettronica - Supporto PEC",
-    "version": "14.0.1.0.0",
+    "version": "14.0.2.3.0",
     "category": "Localization/Italy",
     "summary": "Invio fatture elettroniche tramite PEC",
     "author": "Openforce Srls Unipersonale, Odoo Community Association (OCA)",
@@ -21,13 +21,14 @@
         "l10n_it_sdi_channel",
     ],
     "data": [
-        "security/groups.xml",
-        "views/fatturapa_attachment_out.xml",
-        "wizard/send_pec_view.xml",
-        "views/fetchmail_view.xml",
         "security/ir.model.access.csv",
-        "data/fetchmail_data.xml",
+        "views/fetchmail_view.xml",
         "views/company_view.xml",
+        "views/sdi_view.xml",
+        "views/ir_mail_server.xml",
+        "data/fetchmail_data.xml",
+        "data/config_parameter.xml",
+        "data/sdi_channel_demo.xml",
     ],
     "installable": True,
 }
